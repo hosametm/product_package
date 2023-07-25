@@ -1,0 +1,26 @@
+{
+    "name": "hosam/product-crud",
+    "description": "This package used to do product crud",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Hosam\\ProductCrud\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "hosam",
+            "email": "hosammetman@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Hosam\\ProductCrud\\ProductServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}
