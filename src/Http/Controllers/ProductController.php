@@ -35,7 +35,6 @@ class ProductController extends Controller
     public function index()
     {
         $products = $this->productsService->allProducts();
-//        $products = Product::with('productStock')->paginate();
         return view('product_crud::products.index', compact('products'));
     }
 
@@ -80,7 +79,6 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $this->productUpdateService->update($request, $id);
-        return redirect()->back();
         return redirect(route('product.index'));
     }
 
