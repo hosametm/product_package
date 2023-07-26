@@ -45,7 +45,7 @@
         <tbody>
         @foreach($products as $x => $product)
             <tr>
-                <th scope="row">{{$x+1}}</th>
+                <th scope="row">{{$product->id}}</th>
                 <td>{{$product->name}}</td>
                 <td>
                     {{$product->productStock?->sum('quantity')??0}}

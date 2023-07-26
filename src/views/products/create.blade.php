@@ -52,15 +52,15 @@
                 </div>
                 <div class="form-group col-4">
                     <label for="productQuantity">size</label>
-                    <input class="form-control" type="text" name="stock[0][size]">
+                    <input class="form-control" value="0" type="text" name="stock[0][size]">
                 </div>
                 <div class="form-group col-3">
                     <label for="productQuantity">price</label>
-                    <input class="form-control" type="text" name="stock[0][price]">
+                    <input class="form-control" value="0" type="text" name="stock[0][price]">
                 </div>
                 <div class="form-group col-3">
                     <label for="productQuantity">quantity</label>
-                    <input class="form-control" type="text" name="stock[0][quantity]">
+                    <input class="form-control" value="0" type="text" name="stock[0][quantity]">
                 </div>
                 <div class="form-group" id="addStock" style="display: flex;align-items: end;">
                     <button class="btn btn-secondary"><i class="fa fa-plus"></i></button>
@@ -93,8 +93,6 @@
 
         $("#productImages").change(function (e) {
             loadImages(e);
-            $(this).val('');
-            $('#output').html('');
         });
 
 

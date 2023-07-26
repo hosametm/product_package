@@ -3,18 +3,30 @@
 namespace Hosam\ProductCrud\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Hosam\ProductCrud\Http\Services\ProductCrudService;
-use Hosam\ProductCrud\Http\Services\ProductDetailsService;
-use Hosam\ProductCrud\Http\Services\ProductStoreService;
+use Hosam\ProductCrud\Http\Services\Product\ProductDestroyService;
+use Hosam\ProductCrud\Http\Services\Product\ProductDetailsService;
+use Hosam\ProductCrud\Http\Services\Product\ProductsService;
+use Hosam\ProductCrud\Http\Services\Product\ProductStoreService;
+use Hosam\ProductCrud\Http\Services\Product\ProductUpdateService;
+use Hosam\ProductCrud\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    private $productCrudService;
+    private $productsService;
 
-    public function __construct(ProductCrudService $productCrudService)
-    {
-        $this->productCrudService = $productCrudService;
+    public function __construct(
+        ProductsService $productsService,
+        ProductStoreService $productStoreService,
+        ProductDestroyService $productDestroyService,
+        ProductDetailsService $productDetailsService,
+        ProductUpdateService $productUpdateService
+    ) {
+        $this->productsService = $productsService;
+        $this->productStoreService = $productStoreService;
+        $this->productDestroyService = $productDestroyService;
+        $this->productDetailsService = $productDetailsService;
+        $this->productUpdateService = $productUpdateService;
     }
 
     /**
@@ -22,7 +34,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = $this->productCrudService->index();
+        $products = $this->productsService->allProducts();
+//        $products = Product::with('productStock')->paginate();
         return view('product_crud::products.index', compact('products'));
     }
 
@@ -37,27 +50,27 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, ProductStoreService $productStoreService)
+    public function store(Request $request)
     {
-        $productStoreService->store($request);
+        $this->productStoreService->store($request);
         return redirect(route('product.index'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(ProductDetailsService $productDetailsService, $id)
+    public function show($id)
     {
-        $product = $productDetailsService->details($id);
+        $product = $this->productDetailsService->details($id);
         return view('product_crud::products.show', compact('product'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ProductDetailsService $productDetailsService, $id)
+    public function edit($id)
     {
-        $product = $productDetailsService->details($id);
+        $product = $this->productDetailsService->details($id);
         return view('product_crud::products.edit', compact('product'));
     }
 
@@ -66,8 +79,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = $this->productCrudService->details($id);
-        $product = $this->productCrudService->update($request, $product);
+        $this->productUpdateService->update($request, $id);
         return redirect()->back();
         return redirect(route('product.index'));
     }
@@ -75,10 +87,10 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(ProductDestroyService $productDestroyService, $id)
     {
-        $product = $this->productCrudService->details($id);
-        $this->productCrudService->destroy($product);
+        $productDestroyService->destroy($id);
         return redirect(route('product.index'));
     }
+
 }
