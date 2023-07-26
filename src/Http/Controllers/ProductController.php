@@ -8,7 +8,6 @@ use Hosam\ProductCrud\Http\Services\Product\ProductDetailsService;
 use Hosam\ProductCrud\Http\Services\Product\ProductsService;
 use Hosam\ProductCrud\Http\Services\Product\ProductStoreService;
 use Hosam\ProductCrud\Http\Services\Product\ProductUpdateService;
-use Hosam\ProductCrud\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -83,7 +82,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource
      */
     public function destroy(ProductDestroyService $productDestroyService, $id)
     {
