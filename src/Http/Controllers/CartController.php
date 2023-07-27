@@ -35,6 +35,7 @@ class CartController extends Controller
     public function viewCart()
     {
         try {
+            $_COOKIE['temp_id'] ?? setcookie("temp_id", uniqid('guest-', true), time()+3600);
             return $this->cart->getCartItems();
         } catch (\Throwable $throwable) {
             dd($throwable->getMessage());
