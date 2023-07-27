@@ -3,6 +3,7 @@
 namespace Hosam\ProductCrud\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Hosam\ProductCrud\Http\Repositories\Contract\CartInterface;
 use Hosam\ProductCrud\Http\Repositories\Eloquent\CategoryRepository;
 use Hosam\ProductCrud\Http\Services\Product\ProductDestroyService;
 use Hosam\ProductCrud\Http\Services\Product\ProductDetailsService;
@@ -15,14 +16,14 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     private $productsService;
-    private CategoryRepository $category;
+    private CartInterface $category;
     public function __construct(
         ProductsService $productsService,
         ProductStoreService $productStoreService,
         ProductDestroyService $productDestroyService,
         ProductDetailsService $productDetailsService,
         ProductUpdateService $productUpdateService,
-        CategoryRepository $category
+        CartInterface $category
     ) {
         $this->productsService = $productsService;
         $this->productStoreService = $productStoreService;

@@ -4,6 +4,7 @@ namespace Hosam\ProductCrud\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 
+use Hosam\ProductCrud\Http\Repositories\Contract\CartInterface;
 use Hosam\ProductCrud\Http\Repositories\Eloquent\CartRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -13,7 +14,7 @@ class CartController extends Controller
 {
     protected $cart;
 
-    public function __construct(CartRepository $cart)
+    public function __construct(CartInterface $cart)
     {
         $this->cart = $cart;
     }
