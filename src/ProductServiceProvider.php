@@ -8,7 +8,7 @@ use Illuminate\Support\ServiceProvider;
 class ProductServiceProvider extends ServiceProvider
 {
 
-    public function boot()
+    public function boot(): void
     {
         $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
         $this->loadViewsFrom(__DIR__ . '/views', 'product_crud');
@@ -19,7 +19,7 @@ class ProductServiceProvider extends ServiceProvider
     }
 
 
-    public function register()
+    public function register(): void
     {
         Paginator::useBootstrap();
     }
