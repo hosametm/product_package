@@ -4,6 +4,7 @@ namespace Hosam\ProductCrud\Http\Listeners;
 
 
 use Hosam\ProductCrud\Models\Cart;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
 
 class OnLogin
@@ -22,9 +23,9 @@ class OnLogin
     public function handle(object $event): void
     {
         $user = $event->user;
-        $cart = Cart::whereGuestId($_COOKIE['temp_id'])->get();
+        $cart = Cart::whereGuestId(Cache::get('temp_id'))->get();
         $cart->each(function ($cartItem) use ($user) {
-            $cartItem->update(['user_id' => $user->id]);
+            $cartItem->update(['user_id' => $user->id, 'guest_id' => null]);
         });
     }
 }
