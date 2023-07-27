@@ -2,8 +2,8 @@
 
 namespace Hosam\ProductCrud\Http\Repositories\Contract;
 
-use App\Models\Order;
 use App\Models\User;
+use Hosam\ProductCrud\Models\Order;
 
 interface ControlOrderInterface
 {

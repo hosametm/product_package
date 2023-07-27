@@ -3,29 +3,33 @@
 namespace Hosam\ProductCrud\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Hosam\ProductCrud\Http\Repositories\Eloquent\CategoryRepository;
 use Hosam\ProductCrud\Http\Services\Product\ProductDestroyService;
 use Hosam\ProductCrud\Http\Services\Product\ProductDetailsService;
 use Hosam\ProductCrud\Http\Services\Product\ProductsService;
 use Hosam\ProductCrud\Http\Services\Product\ProductStoreService;
 use Hosam\ProductCrud\Http\Services\Product\ProductUpdateService;
+use Hosam\ProductCrud\Models\Category;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     private $productsService;
-
+    private CategoryRepository $category;
     public function __construct(
         ProductsService $productsService,
         ProductStoreService $productStoreService,
         ProductDestroyService $productDestroyService,
         ProductDetailsService $productDetailsService,
-        ProductUpdateService $productUpdateService
+        ProductUpdateService $productUpdateService,
+        CategoryRepository $category
     ) {
         $this->productsService = $productsService;
         $this->productStoreService = $productStoreService;
         $this->productDestroyService = $productDestroyService;
         $this->productDetailsService = $productDetailsService;
         $this->productUpdateService = $productUpdateService;
+        $this->category = $category;
     }
 
     /**
@@ -42,7 +46,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product_crud::products.create');
+        $categories = $this->category->all();
+        return view('product_crud::products.create',compact('categories'));
     }
 
     /**
@@ -69,7 +74,8 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = $this->productDetailsService->details($id);
-        return view('product_crud::products.edit', compact('product'));
+        $categories = $this->category->all();
+        return view('product_crud::products.edit', compact('product','categories'));
     }
 
     /**
