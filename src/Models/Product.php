@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'published'];
+    protected $fillable = ['name', 'description', 'published','category_id'];
 
     public function scopePublished($query)
     {

@@ -25,11 +25,21 @@
 
         <div class="row">
             <div class="form-group col-md-12">
+                <label for="category_id">Category</label>
+                <select name="category_id" class="form-control form-select" aria-label="Default select example">
+                    <option selected>Select Category</option>
+                    @foreach($categories as $category)
+                        <option value="{{(int)$category->id}}">{{$category->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12">
                 <label for="productImages">Product Images</label>
                 <input class="form-control" name="images[]" multiple="" type="file" id="productImages">
             </div>
         </div>
-
         <div id="output"></div>
         <h2>Stock</h2>
         <div id="stock">

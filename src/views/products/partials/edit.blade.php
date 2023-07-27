@@ -24,7 +24,18 @@
                           rows="3">{{$product->description}}</textarea>
             </div>
         </div>
-
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label for="category_id">Category</label>
+                <select name="category_id" class="form-control form-select" aria-label="Default select example">
+                    <option selected>Select Category</option>
+                    @foreach($categories as $category)
+                        <option
+                            {{$product->category_id === $category->id?'selected':''}} value="{{(int)$category->id}}">{{$category->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
         <div class="row">
             <div class="form-group col-md-12">
                 <label for="productImages">Product Images</label>

@@ -5,10 +5,12 @@ use Hosam\ProductCrud\Http\Controllers\CartController;
 use Hosam\ProductCrud\Http\Controllers\OrderController;
 use Hosam\ProductCrud\Http\Controllers\Front\ProductController as FrontProductController;
 use Illuminate\Support\Facades\Route;
+use Hosam\ProductCrud\Http\Controllers\CategoryController;
 
 Route::group(['middleware' => 'web'], function () {
 
     Route::resource('product', ProductController::class);
+    Route::resource('category', CategoryController::class);
     Route::get('index', [FrontProductController::class, 'index'])->name('products.index');
 
     // Cart routes
