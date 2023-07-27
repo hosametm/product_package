@@ -4,7 +4,7 @@ namespace Hosam\ProductCrud\Http\Repositories\Contract;
 
 interface CartInterface
 {
-    public function addToCart(int $productId, int $quantity): void;
+    public function addToCart(int $productId, int $quantity,$guestId): void;
 
     public function getCartItems();
 
