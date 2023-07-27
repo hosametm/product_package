@@ -3,6 +3,12 @@
 namespace Hosam\ProductCrud;
 
 use Hosam\ProductCrud\Http\Listeners\OnLogin;
+use Hosam\ProductCrud\Http\Repositories\Contract\CartInterface;
+use Hosam\ProductCrud\Http\Repositories\Contract\CategoryInterface;
+use Hosam\ProductCrud\Http\Repositories\Contract\OrderInterface;
+use Hosam\ProductCrud\Http\Repositories\Eloquent\CartRepository;
+use Hosam\ProductCrud\Http\Repositories\Eloquent\CategoryRepository;
+use Hosam\ProductCrud\Http\Repositories\Eloquent\OrderRepository;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
@@ -27,5 +33,8 @@ class ProductServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrap();
         Event::listen(Login::class, OnLogin::class);
+        app()->bind(CartInterface::class, CartRepository::class);
+        app()->bind(CategoryInterface::class, CategoryRepository::class);
+        app()->bind(OrderInterface::class, OrderRepository::class);
     }
 }

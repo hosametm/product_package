@@ -3,6 +3,7 @@
 namespace Hosam\ProductCrud\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Hosam\ProductCrud\Http\Repositories\Contract\CategoryInterface;
 use Hosam\ProductCrud\Http\Repositories\Eloquent\CategoryRepository;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,7 @@ class CategoryController extends Controller
 {
     protected CategoryRepository $category;
 
-    public function __construct(CategoryRepository $category)
+    public function __construct(CategoryInterface $category)
     {
         $this->category = $category;
     }
