@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    protected CategoryRepository $category;
+    protected CategoryInterface $category;
 
     public function __construct(CategoryInterface $category)
     {
