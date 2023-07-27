@@ -19,6 +19,7 @@
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Stock</th>
+            <th scope="col">Category</th>
             <th scope="col">Published?</th>
             <th scope="col">Actions</th>
 
@@ -32,7 +33,8 @@
                 <td>
                     {{$product->productStock?->sum('quantity')??0}}
                 </td>
-                <td>{{$product->published==1?"yes":"no"}}</td>
+                <td>{{$product->category?->name}}</td>
+                <td>{{$product->published===1?"yes":"no"}}</td>
                 <td>
                     <a href="{{route('product.edit',$product->id)}}" title="Edit" class="btn btn-sm btn-secondary"><i class="fa fa-pencil"></i>
                     </a>

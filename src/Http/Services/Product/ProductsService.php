@@ -9,6 +9,6 @@ class ProductsService
 {
     public function allProducts()
     {
-        return Product::with('productStock')->latest()->paginate();
+        return Product::with('productStock','category')->latest()->paginate();
     }
 }
