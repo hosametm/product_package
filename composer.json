@@ -12,6 +12,10 @@
         {
             "name": "hosam",
             "email": "hosammetman@gmail.com"
+        },
+        {
+            "name": "Omar",
+            "email": "omarelnaghy53@gmail.com"
         }
     ],
     "extra": {
@@ -20,6 +24,5 @@
                 "Hosam\\ProductCrud\\ProductServiceProvider"
             ]
         }
-    },
-    "require": {}
+    }
 }
