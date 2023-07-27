@@ -35,8 +35,6 @@ class CartController extends Controller
     public function viewCart()
     {
         try {
-            dd(auth()->check());
-
             return $this->cart->getCartItems();
         } catch (\Throwable $throwable) {
             dd($throwable->getMessage());
