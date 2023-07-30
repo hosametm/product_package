@@ -25,7 +25,7 @@ class CartRepository implements CartInterface
         // TODO: Implement getCartItems() method.
         return auth()->check()
             ? auth()->user()?->carts()->with('product')->get()
-            : Cart::whereGuestId(Cache::get('temp_id'))->whereNotNull('guest_id')->with('product')->get();
+            : Cart::whereGuestId(request()?->cookie('temp_id'))->whereNotNull('guest_id')->with('product')->get();
     }
 
     public function clearCart()
@@ -33,7 +33,7 @@ class CartRepository implements CartInterface
         // TODO: Implement clearCart() method.
         return auth()->check()
             ? auth()->user()?->carts()->delete()
-            : Cart::whereGuestId(Cache::get('temp_id'))->delete();
+            : Cart::whereGuestId(request()?->cookie('temp_id'))->delete();
     }
 
     private function cartItem($productId, $guestId)
