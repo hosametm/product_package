@@ -24,8 +24,8 @@ class CartRepository implements CartInterface
     {
         // TODO: Implement getCartItems() method.
         return auth()->check()
-            ? auth()->user()?->carts()->get()
-            : Cart::whereGuestId(Cache::get('temp_id'))->whereNotNull('guest_id')->get();
+            ? auth()->user()?->carts()->with('product')->get()
+            : Cart::whereGuestId(Cache::get('temp_id'))->whereNotNull('guest_id')->with('product')->get();
     }
 
     public function clearCart()

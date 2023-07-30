@@ -39,8 +39,9 @@ class CartController extends Controller
     public function viewCart()
     {
         try {
-                Cache::get('temp_id') ?: Cache::put('temp_id', uniqid('guest-', true), 3600);
-            return $this->cart->getCartItems();
+            Cache::get('temp_id') ?: Cache::put('temp_id', uniqid('guest-', true), 3600);
+            $carts = $this->cart->getCartItems();
+            return view('product_crud::front.products.cart', compact('carts'));
         } catch (\Throwable $throwable) {
             dd($throwable->getMessage());
         }
@@ -49,7 +50,8 @@ class CartController extends Controller
     public function clearCart()
     {
         try {
-            return $this->cart->clearCart();
+            $this->cart->clearCart() ? $message = "success" : $message = 'failed';
+            return back()->with(['message' => $message]);
         } catch (\Throwable $throwable) {
             dd($throwable->getMessage());
         }
