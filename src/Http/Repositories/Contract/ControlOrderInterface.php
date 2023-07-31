@@ -11,5 +11,4 @@ interface ControlOrderInterface
 
     public function moveCartItemsToOrder(Order $order, \Iterator $cartItems): void;
 
-    public function clearCart(User $user): void;
 }

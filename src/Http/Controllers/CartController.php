@@ -5,10 +5,10 @@ namespace Hosam\ProductCrud\Http\Controllers;
 use App\Http\Controllers\Controller;
 
 use Hosam\ProductCrud\Http\Repositories\Contract\CartInterface;
-use Hosam\ProductCrud\Http\Repositories\Eloquent\CartRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Str;
+
 
 class CartController extends Controller
 {
@@ -22,14 +22,14 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
         try {
-
-            if (!Cache::get('temp_id')) {
-                $guestId = uniqid('guest-', true);
-                Cache::put('temp_id', $guestId, 3600);
+            $guestId = Cookie::get('temp_id');
+            if (!$guestId) {
+                $guestId = Str::uuid();
+                Cookie::queue('temp_id', $guestId, 120);
             }
-            $productId = $request->productId;
-            $quantity = $request->quantity ?? 1;
-            $this->cart->addToCart($productId, $quantity, Cache::get('temp_id'));
+            $productId = $request->input('productId');
+            $quantity = $request->input('quantity', 1);
+            $this->cart->addToCart($productId, $quantity, $guestId);
             return back();
         } catch (\Exception $e) {
             throw $e;
@@ -39,8 +39,9 @@ class CartController extends Controller
     public function viewCart()
     {
         try {
-                Cache::get('temp_id') ?: Cache::put('temp_id', uniqid('guest-', true), 3600);
-            return $this->cart->getCartItems();
+            Cookie::get('temp_id') ?: Cookie::queue('temp_id', uniqid('guest-', true), 120);
+            $carts = $this->cart->getCartItems();
+            return view('product_crud::front.products.cart', compact('carts'));
         } catch (\Throwable $throwable) {
             dd($throwable->getMessage());
         }
@@ -49,7 +50,8 @@ class CartController extends Controller
     public function clearCart()
     {
         try {
-            return $this->cart->clearCart();
+            $this->cart->clearCart() ? $message = "success" : $message = 'failed';
+            return back()->with(['message' => $message]);
         } catch (\Throwable $throwable) {
             dd($throwable->getMessage());
         }
