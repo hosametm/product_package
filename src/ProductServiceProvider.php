@@ -11,6 +11,7 @@ use Hosam\ProductCrud\Http\Repositories\Eloquent\CategoryRepository;
 use Hosam\ProductCrud\Http\Repositories\Eloquent\OrderRepository;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Auth\Events\Login;
 
@@ -26,6 +27,8 @@ class ProductServiceProvider extends ServiceProvider
             __DIR__ . '/views/products/partials' => resource_path('views/vendor/product_crud/products/partials'),
             __DIR__ . '/views/categories/partials' => resource_path('views/vendor/product_crud/categories/partials')
         ]);
+        Route::middleware('web')
+            ->group(__DIR__ . '/routes/web.php');
     }
 
 
