@@ -9,15 +9,18 @@
         </div>
     </div>
     <div class="row justify-content-around ">
-
         @forelse($carts as $cartItem)
+
             <div class="col-3 card ml-1" style="">
                 <img src="{{ $cartItem->image? asset('public/products/').$product->image
                                       :asset('public/default.jpeg')}}"
                      class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{$cartItem->product->name}}</h5>
-                    <p class="card-text">{{$cartItem->product->description}}</p>
+                    <div class="card-body">
+                    <h5 class="card-title">{{$cartItem->stock?->product?->name}}</h5>
+                    <p class="card-text">{{$cartItem->stock?->product?->description}}</p>
+                    <p>Quantity : {{$cartItem->quantity}}</p>
+                    <p class="card-text">Size : {{$cartItem->stock->size}}</p>
+                    <p>Total Price : {{$cartItem->quantity * (int) $cartItem->stock->price}}</p>
                 </div>
             </div>
 

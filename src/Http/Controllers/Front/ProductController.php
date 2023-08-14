@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use Hosam\ProductCrud\Http\Services\Product\ProductsService;
 
+use Hosam\ProductCrud\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -24,5 +25,11 @@ class ProductController extends Controller
     {
         $products = $this->productsService->allProducts();
         return view('product_crud::front.products.index', compact('products'));
+    }
+
+    public function productStocks(Product $product)
+    {
+        $product->load('productStock');
+        return view('product_crud::front.products.stocks', compact('product'));
     }
 }

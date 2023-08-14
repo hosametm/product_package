@@ -38,8 +38,13 @@
                 <td>
                     <a href="{{route('product.edit',$product->id)}}" title="Edit" class="btn btn-sm btn-secondary"><i class="fa fa-pencil"></i>
                     </a>
-                    <a href="" title="Delete" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i>
-                    </a>
+
+
+                    <form style="display: unset" action="{{ route('product.destroy', $product->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" title="Delete" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                    </form>
                 </td>
             </tr>
         @endforeach

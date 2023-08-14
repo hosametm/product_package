@@ -7,7 +7,7 @@ use Hosam\ProductCrud\Models\Product;
 
 class ProductDetailsService
 {
-    public function details($id)
+    public static function details($id)
     {
         return Product::with('productStock')->find($id);
     }

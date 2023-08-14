@@ -18,11 +18,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{$product->name}}</h5>
                     <p class="card-text">{{$product->description}}</p>
-                    <form method="POST" action="{{route('cart.add')}}">
-                        @csrf
-                        <input type="hidden" name="productId" value="{{$product->id}}">
-                        <button type="submit" class="btn btn-primary">Add To Cart</button>
-                    </form>
+                    <a href="{{route('product.stocks',$product)}}" class="btn btn-primary">Stocks</a>
 
                 </div>
             </div>
