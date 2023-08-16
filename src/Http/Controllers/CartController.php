@@ -27,9 +27,9 @@ class CartController extends Controller
                 $guestId = Str::uuid();
                 Cookie::queue('temp_id', $guestId, 120);
             }
-            $productId = $request->input('productId');
+            $productStockId = $request->input('productStockId');
             $quantity = $request->input('quantity', 1);
-            $this->cart->addToCart($productId, $quantity, $guestId);
+            $this->cart->addToCart($productStockId, $quantity, $guestId);
             return back();
         } catch (\Exception $e) {
             throw $e;
