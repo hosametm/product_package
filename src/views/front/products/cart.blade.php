@@ -9,7 +9,9 @@
         </div>
     </div>
     <div class="row justify-content-around ">
-        <a href="{{route('order.create')}}">Place Order</a>
+        @if(!Auth::user()->carts->empty())
+            <a href="{{route('order.create')}}">Place Order</a>
+        @endif
         @forelse($carts as $cartItem)
 
             <div class="col-3 card ml-1" style="">
