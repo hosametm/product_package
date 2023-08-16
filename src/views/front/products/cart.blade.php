@@ -9,6 +9,7 @@
         </div>
     </div>
     <div class="row justify-content-around ">
+        <a href="{{route('order.create')}}">Place Order</a>
         @forelse($carts as $cartItem)
 
             <div class="col-3 card ml-1" style="">
