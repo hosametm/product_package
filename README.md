@@ -5,5 +5,5 @@
 Run this command in your terminal:
 
 ```php
-composer require hosam/product_crud
+composer require hosam/product-crud
 ```
