@@ -10,7 +10,7 @@ use Hosam\ProductCrud\Http\Controllers\CategoryController;
 
 Route::resource('product', ProductController::class);
 Route::resource('category', CategoryController::class);
-Route::get('/', [FrontProductController::class, 'index'])->name('products.index');
+Route::get('/all-products', [FrontProductController::class, 'index'])->name('products.index');
 Route::get('product-stocks/{product}', [FrontProductController::class, 'productStocks'])->name('product.stocks');
 
 // Cart routes
