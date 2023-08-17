@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="row justify-content-around ">
-        @if(!Auth::user()->carts->empty())
+        @if(Auth::check() && Auth::user()->carts->count() > 0)
             <a href="{{route('order.create')}}">Place Order</a>
         @endif
         @forelse($carts as $cartItem)
